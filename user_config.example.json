@@ -1,0 +1,33 @@
+{
+  "source": "",
+  "destination": "",
+  "pairs": [
+    {"source": "", "destination": ""},
+    {"source": "", "destination": ""},
+    {"source": "", "destination": ""}
+  ],
+  "saved_lists": [],
+  "active_list": "",
+  "log_path": "",
+  "copy_subdirs": true,
+  "exclude_older": true,
+  "fat_file_times": true,
+  "retries": 1,
+  "wait_seconds": 1,
+  "multi_thread": 8,
+  "dry_run": false,
+  "compare_only": false,
+  "mirror": false,
+  "tee_console": true,
+  "write_log": true,
+  "purge": false,
+  "skip_junctions": false,
+  "copy_security": false,
+  "dst_adjust": false,
+  "unbuffered": false,
+  "restartable": false,
+  "exclude_dirs": "",
+  "exclude_files": "",
+  "max_age_days": 0,
+  "copy_all": false
+}

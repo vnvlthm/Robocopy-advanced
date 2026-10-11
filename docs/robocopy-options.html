@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Robocopy options guide — Explorer Advance</title>
+  <style>
+    :root {
+      --bg: #f4f6f9;
+      --card: #ffffff;
+      --text: #1a2332;
+      --muted: #5a6577;
+      --primary: #1565c0;
+      --primary-soft: #e3f0fb;
+      --accent: #00897b;
+      --warn: #e65100;
+      --border: #d8dee8;
+      --code-bg: #1e2430;
+      --code-fg: #e8ecf1;
+      --thead: #eef3f9;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      font-size: 15px;
+    }
+    header {
+      background: linear-gradient(135deg, #1565c0 0%, #0d47a1 55%, #00695c 100%);
+      color: #fff;
+      padding: 1.5rem 1.25rem 1.25rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,.15);
+    }
+    header .wrap { max-width: 920px; margin: 0 auto; }
+    header h1 {
+      margin: 0 0 .35rem;
+      font-size: 1.55rem;
+      font-weight: 650;
+    }
+    header p {
+      margin: 0;
+      opacity: .92;
+      max-width: 48rem;
+    }
+    header .meta {
+      margin-top: .85rem;
+      font-size: .85rem;
+      opacity: .85;
+    }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 1.25rem; }
+    nav.toc {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.15rem;
+      margin-bottom: 1.25rem;
+    }
+    nav.toc h2 {
+      margin: 0 0 .5rem;
+      font-size: 1rem;
+    }
+    nav.toc ol {
+      margin: 0;
+      padding-left: 1.25rem;
+    }
+    nav.toc a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    nav.toc a:hover { text-decoration: underline; }
+    section.card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.15rem 1.25rem 1.35rem;
+      margin-bottom: 1.1rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,.04);
+    }
+    section.card h2 {
+      margin: 0 0 .65rem;
+      font-size: 1.2rem;
+      color: #0d47a1;
+      scroll-margin-top: 1rem;
+    }
+    section.card h3 {
+      margin: 1rem 0 .4rem;
+      font-size: 1rem;
+      color: #37474f;
+    }
+    p { margin: .5rem 0 .75rem; }
+    .muted { color: var(--muted); }
+    .takeaway {
+      background: var(--primary-soft);
+      border-left: 4px solid var(--primary);
+      padding: .65rem .9rem;
+      border-radius: 0 8px 8px 0;
+      margin: .75rem 0 0;
+    }
+    .warn-box {
+      background: #fff3e0;
+      border-left: 4px solid var(--warn);
+      padding: .65rem .9rem;
+      border-radius: 0 8px 8px 0;
+      margin: .75rem 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .92rem;
+      margin: .5rem 0 1rem;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: .45rem .6rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: var(--thead);
+      font-weight: 600;
+    }
+    tr:nth-child(even) td { background: #fafbfd; }
+    code, .flag {
+      font-family: ui-monospace, "Cascadia Code", "Consolas", monospace;
+      font-size: .88em;
+    }
+    .flag {
+      background: #e8eef7;
+      color: #0d47a1;
+      padding: .08em .35em;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    pre {
+      background: var(--code-bg);
+      color: var(--code-fg);
+      padding: .85rem 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: .85rem;
+      line-height: 1.45;
+      margin: .5rem 0 1rem;
+    }
+    pre code {
+      font-family: ui-monospace, "Cascadia Code", "Consolas", monospace;
+      background: none;
+      color: inherit;
+      padding: 0;
+    }
+    ul { margin: .4rem 0 .8rem; padding-left: 1.3rem; }
+    li { margin: .25rem 0; }
+    footer {
+      max-width: 920px;
+      margin: 0 auto 2rem;
+      padding: 0 1.25rem;
+      color: var(--muted);
+      font-size: .85rem;
+    }
+    footer a { color: var(--primary); }
+    @media (max-width: 640px) {
+      table { font-size: .82rem; }
+      th, td { padding: .35rem .4rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Interesting Robocopy options</h1>
+      <p>
+        A practical tour of Robocopy flags, grouped by what they help you do.
+        Several of the best ones are already in <strong>Explorer Advance</strong>;
+        many others are worth knowing for special jobs.
+      </p>
+      <p class="meta">Explorer Advance · companion guide · open from the app or this file</p>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <nav class="toc" aria-label="Table of contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#shape">What to copy (the shape of the job)</a></li>
+        <li><a href="#selection">What “same file” means (selection filters)</a></li>
+        <li><a href="#exclude">Exclude noise</a></li>
+        <li><a href="#perf">Performance &amp; network</a></li>
+        <li><a href="#security">Security &amp; metadata</a></li>
+        <li><a href="#logging">Logging &amp; dry-run</a></li>
+        <li><a href="#jobs">Jobs &amp; automation</a></li>
+        <li><a href="#usecases">What maps well to common use cases</a></li>
+        <li><a href="#app">Already in Explorer Advance vs future toggles</a></li>
+        <li><a href="#bottom">Bottom line</a></li>
+      </ol>
+    </nav>
+
+    <!-- 1 -->
+    <section class="card" id="shape">
+      <h2>1. What to copy (the “shape” of the job)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Option</th>
+            <th>Meaning</th>
+            <th>When it’s interesting</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="flag">/S</span></td>
+            <td>Subfolders, <strong>not</strong> empty ones</td>
+            <td>Slightly lighter than <span class="flag">/E</span> if empty dirs don’t matter</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/E</span></td>
+            <td>Subfolders <strong>including</strong> empty</td>
+            <td>Default in the app — full tree shape</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/LEV:n</span></td>
+            <td>Only the first <em>n</em> levels</td>
+            <td>“Copy only top 2 levels of this huge tree”</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/MIR</span></td>
+            <td>Mirror = <span class="flag">/E</span> + <span class="flag">/PURGE</span></td>
+            <td>Make dest <strong>identical</strong> to source (can <strong>delete</strong> extras on dest)</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/PURGE</span></td>
+            <td>Delete dest files that vanished from source</td>
+            <td>Cleanup without full mirror packaging</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/MOV</span> / <span class="flag">/MOVE</span></td>
+            <td>Copy then <strong>delete from source</strong></td>
+            <td>True “move” of files / whole tree</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/CREATE</span></td>
+            <td>Create tree + <strong>0-byte</strong> files only</td>
+            <td>Pre-create structure / test paths without data</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="takeaway">
+        <strong>Takeaway:</strong>
+        <span class="flag">/E</span> + <span class="flag">/XO</span> = <em>update</em>.
+        Add <span class="flag">/PURGE</span> to also delete dest-only files while keeping <span class="flag">/XO</span>.
+        <span class="flag">/MIR</span> = <em>make dest a clone</em> (dangerous if paths are wrong).
+        Always dry-run (<span class="flag">/L</span>) before <span class="flag">/PURGE</span> or <span class="flag">/MIR</span>.
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="card" id="selection">
+      <h2>2. What “same file” means (selection filters)</h2>
+      <p class="muted">
+        These control <em>which</em> files Robocopy decides to copy — this is where it beats Explorer.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Option</th>
+            <th>Meaning</th>
+            <th>Why it’s useful</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="flag">/XO</span></td>
+            <td>Exclude <strong>Older</strong> (skip if dest is newer / same under Robocopy’s rules)</td>
+            <td>Daily “update folder” mode</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/XN</span></td>
+            <td>Exclude <strong>New</strong> (don’t add files that only exist on source)</td>
+            <td>Refresh existing files only</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/XC</span></td>
+            <td>Exclude <strong>Changed</strong></td>
+            <td>Rare; narrow jobs</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/XX</span></td>
+            <td>Don’t report/copy “extra” on dest</td>
+            <td>Quieter logs; no interest in dest-only files</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/XL</span></td>
+            <td>Exclude “Lonely” (exist only on one side)</td>
+            <td>Only touch files present on both sides</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/IS</span></td>
+            <td>Include <strong>Same</strong> files</td>
+            <td>Force re-copy even when Robocopy thinks identical</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/IT</span></td>
+            <td>Include “Tweaked”</td>
+            <td>Subtle attribute/time edge cases</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/IM</span></td>
+            <td>Include <strong>Modified</strong> (different modify times)</td>
+            <td>When “same size” but different mtime should still copy</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/FFT</span></td>
+            <td>FAT-style times (2-second granularity)</td>
+            <td>Cross-drive / USB / NAS time noise</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/DST</span></td>
+            <td>Compensate 1-hour DST shifts</td>
+            <td>Seasonal “everything looks 1h off” nonsense</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Age / size filters (very handy)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Option</th>
+            <th>Effect</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="flag">/MAX:n</span> / <span class="flag">/MIN:n</span></td>
+            <td>Max/min file size (bytes)</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/MAXAGE:n</span> / <span class="flag">/MINAGE:n</span></td>
+            <td>Only files older/newer than <em>n</em> days (or a date)</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/MAXLAD</span> / <span class="flag">/MINLAD</span></td>
+            <td>By <strong>last access</strong> time</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Example idea: copy only files modified in the last 7 days:</p>
+      <pre><code>robocopy SRC DST /E /MAXAGE:7</code></pre>
+    </section>
+
+    <!-- 3 -->
+    <section class="card" id="exclude">
+      <h2>3. Exclude noise (huge quality-of-life)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Option</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="flag">/XF file…</span></td>
+            <td>Exclude files by name/wildcard (<code>*.tmp</code>, <code>Thumbs.db</code>, …)</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/XD dir…</span></td>
+            <td>Exclude folders (<code>node_modules</code>, <code>.git</code>, <code>$RECYCLE.BIN</code>, …)</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/XA:…</span></td>
+            <td>Exclude by attributes (e.g. hidden/system)</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/IA:…</span></td>
+            <td>Include only certain attributes</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/A</span> / <span class="flag">/M</span></td>
+            <td>Only files with <strong>Archive</strong> bit (<span class="flag">/M</span> clears it after — classic backup style)</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Example: update a project tree without dependencies:</p>
+      <pre><code>robocopy C:\proj D:\backup\proj /E /XO /XD node_modules .git __pycache__ /XF *.log</code></pre>
+      <p class="muted">This is often more valuable than raw speed.</p>
+    </section>
+
+    <!-- 4 -->
+    <section class="card" id="perf">
+      <h2>4. Performance &amp; network</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Option</th>
+            <th>Meaning</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="flag">/MT[:n]</span></td>
+            <td>Multi-thread (default 8, max 128)</td>
+            <td>Great for many small files; already in the app</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/J</span></td>
+            <td>Unbuffered I/O</td>
+            <td>Often better for <strong>very large</strong> files</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/IPG:n</span></td>
+            <td>Inter-packet gap (ms)</td>
+            <td>Throttle on slow/WAN links (incompatible with <span class="flag">/MT</span>)</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/IoRate:…</span> / <span class="flag">/IoMaxSize:…</span></td>
+            <td>I/O rate limiting</td>
+            <td>Protect a live server disk from being saturated</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/COMPRESS</span></td>
+            <td>Request SMB compression</td>
+            <td>Can help on some networks</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/Z</span></td>
+            <td>Restartable mode</td>
+            <td>Resume large interrupted network copies</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/B</span> / <span class="flag">/ZB</span></td>
+            <td>Backup mode / restart→backup</td>
+            <td>Needs privileges; helps locked/special files</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/RH:hhmm-hhmm</span></td>
+            <td>Only run in a time window</td>
+            <td>Night-only jobs</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/MON:n</span> / <span class="flag">/MOT:m</span></td>
+            <td>Watch source and <strong>re-run</strong> after changes</td>
+            <td>Continuous sync-ish behaviour</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="takeaway">
+        Default retries are brutal (<span class="flag">/R</span> ~ 1 million, <span class="flag">/W</span> 30s).
+        Explorer Advance’s <span class="flag">/R:1</span> <span class="flag">/W:1</span> is intentional: <strong>fail fast</strong> on locked files.
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="card" id="security">
+      <h2>5. Security &amp; metadata (beyond “just the bytes”)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Option</th>
+            <th>Copies…</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="flag">/COPY:DAT</span></td>
+            <td>Data, Attributes, Timestamps (default)</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/SEC</span> or <span class="flag">/COPY:DATS</span></td>
+            <td>+ NTFS ACLs</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/COPYALL</span></td>
+            <td>Data + attrs + times + security + owner + auditing</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/SECFIX</span></td>
+            <td>Fix security on <strong>skipped</strong> files too</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/TIMFIX</span></td>
+            <td>Fix timestamps on skipped files</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/DCOPY:…</span></td>
+            <td>What to copy for <strong>directories</strong></td>
+          </tr>
+          <tr>
+            <td><span class="flag">/EFSRAW</span></td>
+            <td>Encrypted (EFS) files in raw form</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/SL</span> / <span class="flag">/SJ</span></td>
+            <td>Copy symlinks/junctions as links, not as targets</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/XJ</span> / <span class="flag">/XJD</span> / <span class="flag">/XJF</span></td>
+            <td><strong>Exclude</strong> junctions/symlinks (avoids wandering into other volumes)</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        Interesting for “real” backups of NTFS shares:
+        <span class="flag">/COPYALL</span> <span class="flag">/DCOPY:DAT</span> <span class="flag">/MIR</span>
+        (with care), and <span class="flag">/XJD</span> so a junction doesn’t pull half the disk into the job.
+      </p>
+    </section>
+
+    <!-- 6 -->
+    <section class="card" id="logging">
+      <h2>6. Logging &amp; dry-run (operations)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Option</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="flag">/L</span></td>
+            <td>List only — <strong>no</strong> copy/delete (best friend of <span class="flag">/MIR</span>). Explorer Advance <strong>Compare only</strong> uses this with no <span class="flag">/XO</span> and a <code>compare_*.log</code> for visual differences without copying.</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/V</span></td>
+            <td>Verbose (shows skipped files)</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/TS</span> / <span class="flag">/FP</span></td>
+            <td>Source timestamps / full paths in output</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/ETA</span></td>
+            <td>Estimated time of arrival per file</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/NP</span></td>
+            <td>No % progress (cleaner logs — used by the app)</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/NDL</span> / <span class="flag">/NFL</span></td>
+            <td>Suppress dir/file name lists</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/LOG:</span> / <span class="flag">/LOG+:</span></td>
+            <td>Overwrite vs <strong>append</strong> log</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/UNILOG:</span></td>
+            <td>Unicode log (better for non-ASCII names)</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/TEE</span></td>
+            <td>Console + log together</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="warn-box">
+        <strong>Exit codes:</strong> Robocopy treats <strong>0–7</strong> as often “OK”;
+        <strong>≥ 8</strong> means real failure. An exit code of <strong>1</strong> after a real update is normal and good.
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section class="card" id="jobs">
+      <h2>7. Jobs &amp; automation</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Option</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="flag">/SAVE:jobname</span></td>
+            <td>Save this command line as a job file</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/JOB:jobname</span></td>
+            <td>Reload and run a saved job</td>
+          </tr>
+          <tr>
+            <td><span class="flag">/QUIT</span></td>
+            <td>Parse/show params and exit (debug)</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="muted">
+        Nice for recurring “Documents → NAS” recipes without retyping flags.
+      </p>
+    </section>
+
+    <!-- 8 -->
+    <section class="card" id="usecases">
+      <h2>8. What maps well to common use cases</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Goal</th>
+            <th>Strong combo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Routine folder update</strong></td>
+            <td>
+              <span class="flag">/E</span> <span class="flag">/XO</span> <span class="flag">/FFT</span>
+              <span class="flag">/R:1</span> <span class="flag">/W:1</span> <span class="flag">/MT:8</span>
+              <span class="flag">/LOG:…</span> <span class="flag">/TEE</span>
+              — basically what the app does
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Preview first</strong></td>
+            <td>Add <span class="flag">/L</span> (and maybe <span class="flag">/V</span>)</td>
+          </tr>
+          <tr>
+            <td><strong>Exact clone of source</strong></td>
+            <td><span class="flag">/MIR</span> + dry-run first; optional <span class="flag">/XJD</span></td>
+          </tr>
+          <tr>
+            <td><strong>Backup with permissions</strong></td>
+            <td>
+              <span class="flag">/E</span> <span class="flag">/COPYALL</span> <span class="flag">/DCOPY:DAT</span>
+              <span class="flag">/R:2</span> <span class="flag">/W:5</span>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Skip junk</strong></td>
+            <td><span class="flag">/XD</span> + <span class="flag">/XF</span></td>
+          </tr>
+          <tr>
+            <td><strong>Only recent work</strong></td>
+            <td><span class="flag">/E</span> <span class="flag">/MAXAGE:7</span> (or 30)</td>
+          </tr>
+          <tr>
+            <td><strong>Huge media files over LAN</strong></td>
+            <td>
+              <span class="flag">/E</span> <span class="flag">/XO</span> <span class="flag">/J</span>
+              <span class="flag">/Z</span> <span class="flag">/MT:4</span>
+              (tune threads; try <span class="flag">/COMPRESS</span>)
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Don’t hammer a server</strong></td>
+            <td><span class="flag">/IPG</span> or <span class="flag">/IoRate</span> instead of high <span class="flag">/MT</span></td>
+          </tr>
+          <tr>
+            <td><strong>Nightly auto sync</strong></td>
+            <td>
+              <span class="flag">/MIR</span> + <span class="flag">/RH:2200-0600</span>
+              or Task Scheduler + the app’s command
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 9 -->
+    <section class="card" id="app">
+      <h2>9. Already in Explorer Advance vs nice future toggles</h2>
+      <h3>In the app today</h3>
+      <p>
+        <span class="flag">/E</span>,
+        <span class="flag">/XO</span>,
+        <span class="flag">/FFT</span>,
+        <span class="flag">/R</span>,
+        <span class="flag">/W</span>,
+        <span class="flag">/MT</span>,
+        <span class="flag">/L</span>,
+        <span class="flag">/MIR</span>,
+        <span class="flag">/PURGE</span>,
+        <span class="flag">/XJD</span>,
+        <span class="flag">/SEC</span>,
+        <span class="flag">/COPYALL</span>,
+        <span class="flag">/DST</span>,
+        <span class="flag">/J</span>,
+        <span class="flag">/Z</span>,
+        <span class="flag">/XD</span>,
+        <span class="flag">/XF</span>,
+        <span class="flag">/MAXAGE</span>,
+        <span class="flag">/LOG</span>,
+        <span class="flag">/TEE</span>,
+        plus
+        <span class="flag">/NP</span>
+        <span class="flag">/NDL</span>
+        for cleaner live output.
+        Named projects store the rows <em>and</em> these options.
+      </p>
+      <h3>Especially interesting to add later</h3>
+      <ul>
+        <li><span class="flag">/MINAGE</span> and size filters — finer “only these files”</li>
+        <li><span class="flag">/DCOPY</span> — directory timestamps</li>
+        <li><span class="flag">/EFSRAW</span> — copy encrypted files as-is</li>
+        <li><span class="flag">/V</span> / <span class="flag">/ETA</span> — richer logs</li>
+        <li><span class="flag">/LOG+</span> — append history instead of overwrite</li>
+      </ul>
+    </section>
+
+    <!-- bottom -->
+    <section class="card" id="bottom">
+      <h2>Bottom line</h2>
+      <p>
+        Robocopy’s power isn’t only speed — it’s
+        <strong>precise selection</strong> (<span class="flag">/XO</span>, age/size, <span class="flag">/XF</span>/<span class="flag">/XD</span>),
+        <strong>safe rehearsal</strong> (<span class="flag">/L</span>),
+        <strong>controlled destruction</strong> (<span class="flag">/PURGE</span>/<span class="flag">/MIR</span>),
+        and <strong>metadata-aware</strong> copies (<span class="flag">/COPY</span>, <span class="flag">/SEC</span>).
+        Explorer doesn’t give you that control.
+      </p>
+      <p class="muted">
+        Tip: from a terminal, <code>robocopy /?</code> shows the full official list for your Windows version
+        (wording may be in the system language).
+      </p>
+    </section>
+  </div>
+
+  <footer>
+    <p>
+      Part of <strong>Explorer Advance</strong> —
+      open the app with <code>py -3 main.py</code> (default
+      <a href="http://127.0.0.1:8765">http://127.0.0.1:8765</a>).
+    </p>
+  </footer>
+</body>
+</html>

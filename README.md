@@ -17,6 +17,12 @@ Fill source → destination rows, preview the exact command, confirm, and run. J
 
 Default preset is **Update newer only** (`/E /XO /FFT`). **Compare only** lists differences with no copy. **`/MIR`** and **`/PURGE`** can delete destination extras and need extra confirmation.
 
+## Screenshot
+
+![Copy / Compare tab](docs/screenshots/main.png)
+
+Source → destination pairs, presets, command preview, then confirm.
+
 ## Requirements
 
 - Windows (Robocopy is included)
@@ -97,6 +103,7 @@ robocopy_docs.py          # Manual text + command catalog
 requirements.txt
 user_config.example.json  # shape of the local settings file
 docs/robocopy-options.html
+docs/screenshots/         # UI capture for this README
 ```
 
 ## License
